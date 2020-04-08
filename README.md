@@ -20,21 +20,23 @@ Tsoa
 
 ### project structure
 
-`src`
-`│   app.js          # App entry point`
-`└───bin             # Express route starter file`
-`└───config          # configuration related stuff`
-`└───controllers     # Express route controllers for all the endpoints of the app`
-`└───database`
-`   └───migrations   # Database migration files`
-`    └───seeders     # Database seeders files`
-`└───models          # Database models`
-`└───repositories    # custom db repositories`
-`└───routes          # tsoa swagger generated routes`
-`└───services        # All the business logic is here`
-`└───subscribers     # event subscribers` 
-`└───types           # typescript custom types` 
-`└───utils           # common helper classes`
+```
+src
+│   app.js          # App entry point
+└───bin             # Express route starter file
+└───config          # configuration related stuff
+└───controllers     # Express route controllers for all the endpoints of the app
+└───database 
+    └───migrations  # Database migration files
+    └───seeders     # Database seeders files
+└───models          # Database models
+└───repositories    # custom db repositories
+└───routes          # tsoa swagger generated routes
+└───services        # All the business logic is here
+└───subscribers     # event subscribers 
+└───types           # typescript custom types 
+└───utils           # common helper classes
+```
 
 ### Running Dev Server
 

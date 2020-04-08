@@ -19,6 +19,48 @@ Inversify
 Tsoa
 
 ### project structure
+
+app
+├── config
+│   └── routes.js
+├── screens
+│   └── App
+│       ├── components
+│       ├── screens
+│       │   ├── Admin
+│       │   │   ├── components
+│       │   │   ├── screens
+│       │   │   │   ├── Reports
+│       │   │   │   │   ├── components
+│       │   │   │   │   ├── stores
+│       │   │   │   │   │   └── ReportsStore.js
+│       │   │   │   │   └── index.js
+│       │   │   │   └── Users
+│       │   │   │       ├── components
+│       │   │   │       └── index.js
+│       │   │   ├── shared
+│       │   │   │   └── stores
+│       │   │   │       ├── AccountStore.js
+│       │   │   │       └── UserStore.js
+│       │   │   └── index.js
+│       │   └── Course
+│       │       ├── components
+│       │       ├── screens
+│       │       │   └── Assignments
+│       │       │       ├── components
+│       │       │       └── index.js
+│       │       └── index.js
+│       ├── shared
+│       │   └── components
+│       │       ├── Avatar.js
+│       │       └── Icon.js
+│       └── index.js
+├── shared
+│   └── util
+│       └── createStore.js
+└── index.js
+
+
 src
 │   app.js          # App entry point
 └───bin             # Express route starter file

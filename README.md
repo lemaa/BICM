@@ -20,62 +20,21 @@ Tsoa
 
 ### project structure
 
-app
-├── config
-│   └── routes.js
-├── screens
-│   └── App
-│       ├── components
-│       ├── screens
-│       │   ├── Admin
-│       │   │   ├── components
-│       │   │   ├── screens
-│       │   │   │   ├── Reports
-│       │   │   │   │   ├── components
-│       │   │   │   │   ├── stores
-│       │   │   │   │   │   └── ReportsStore.js
-│       │   │   │   │   └── index.js
-│       │   │   │   └── Users
-│       │   │   │       ├── components
-│       │   │   │       └── index.js
-│       │   │   ├── shared
-│       │   │   │   └── stores
-│       │   │   │       ├── AccountStore.js
-│       │   │   │       └── UserStore.js
-│       │   │   └── index.js
-│       │   └── Course
-│       │       ├── components
-│       │       ├── screens
-│       │       │   └── Assignments
-│       │       │       ├── components
-│       │       │       └── index.js
-│       │       └── index.js
-│       ├── shared
-│       │   └── components
-│       │       ├── Avatar.js
-│       │       └── Icon.js
-│       └── index.js
-├── shared
-│   └── util
-│       └── createStore.js
-└── index.js
-
-
-src
-│   app.js          # App entry point
-└───bin             # Express route starter file
-└───config          # configuration related stuff
-└───controllers     # Express route controllers for all the endpoints of the app
-└───database 
-    └───migrations  # Database migration files
-    └───seeders     # Database seeders files
-└───models          # Database models
-└───repositories    # custom db repositories
-└───routes          # tsoa swagger generated routes
-└───services        # All the business logic is here
-└───subscribers     # event subscribers 
-└───types           # typescript custom types 
-└───utils           # common helper classes
+`src`
+`│   app.js          # App entry point`
+`└───bin             # Express route starter file`
+`└───config          # configuration related stuff`
+`└───controllers     # Express route controllers for all the endpoints of the app`
+`└───database`
+`   └───migrations   # Database migration files`
+`    └───seeders     # Database seeders files`
+`└───models          # Database models`
+`└───repositories    # custom db repositories`
+`└───routes          # tsoa swagger generated routes`
+`└───services        # All the business logic is here`
+`└───subscribers     # event subscribers` 
+`└───types           # typescript custom types` 
+`└───utils           # common helper classes`
 
 ### Running Dev Server
 

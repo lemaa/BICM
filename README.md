@@ -1,6 +1,5 @@
 # bicm
-An example RESTful API built with NodeJs, TypeScript,
-
+An example of NodeJs RESTful API
 
 # Getting Started
 

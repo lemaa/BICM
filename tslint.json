@@ -1,0 +1,120 @@
+{
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "defaultSeverity": "error",
+    "extends": [
+        "eslint-config-airbnb-typescript",
+        "tslint-config-prettier",
+        "tslint:recommended"
+
+    ],
+    "jsRules": {},
+    "rules": {
+        "no-plusplus": ["error", {
+            "allowForLoopAfterthoughts": true
+        }],
+        "no-console": [
+            true,
+            "debug",
+            "info",
+            "time",
+            "timeEnd",
+            "trace"
+        ],
+        "class-name": true,
+        "comment-format": [
+            true,
+            "check-space"
+        ],
+        "no-duplicate-variable": true,
+        "no-eval": true,
+        "no-internal-module": true,
+        "no-trailing-whitespace": true,
+        "no-var-keyword": true,
+        "no-var-requires": false,
+        "one-line": [
+            true,
+            "check-catch",
+            "check-finally",
+            "check-else",
+            "check-open-brace",
+            "check-whitespace"
+        ],
+        "quotemark": [
+            true,
+            "single"
+        ],
+        "semicolon": [
+            true,
+            "always"
+        ],
+        "triple-equals": [
+            true,
+            "allow-null-check"
+        ],
+        "typedef-whitespace": [
+            true,
+            {
+                "call-signature": "nospace",
+                "index-signature": "nospace",
+                "parameter": "nospace",
+                "property-declaration": "nospace",
+                "variable-declaration": "nospace"
+            },
+            {
+                "call-signature": "onespace",
+                "index-signature": "onespace",
+                "parameter": "onespace",
+                "property-declaration": "onespace",
+                "variable-declaration": "onespace"
+            }
+        ],
+        "variable-name": [
+            true,
+            "ban-keywords"
+        ],
+        "whitespace": [
+            true,
+            "check-branch",
+            "check-decl",
+            "check-operator",
+            "check-separator",
+            "check-type"
+        ],
+        "no-shadowed-variable": false,
+        "jsdoc-format": true,
+        "no-consecutive-blank-lines": true,
+        "one-variable-per-declaration": [
+            true,
+            "ignore-for-loop"
+        ],
+        "curly": true,
+        "no-empty": true,
+        "no-unused-expression": true,
+        "eofline": true,
+        "trailing-comma": [
+            true,
+            {
+                "singleline": "never",
+                "multiline": "never"
+            }
+        ],
+        "align": [
+            true,
+            "parameters",
+            "statements"
+        ]
+
+    },
+    "rulesDirectory": [],
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    },
+    "linterOptions": {
+        "exclude": [
+          "bin"
+        ]
+      }
+}

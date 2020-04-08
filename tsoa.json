@@ -1,0 +1,14 @@
+{
+    "swagger": {
+        "outputDirectory": ".",
+        "entryFile": "./src/app.ts",
+        "noImplicitAdditionalProperties": "silently-remove-extras"
+
+    },
+    "routes": {
+        "basePath": "/",
+        "entryFile": "./src/app.ts",
+        "routesDir": "./src/routes",
+        "iocModule": "./src/config/ioc"
+    }
+}

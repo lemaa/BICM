@@ -12,11 +12,14 @@ create .env file to suit your needs.
 
  
 # Built With
+
+```
 Express  
 Typescript
 TypeOrm
 Inversify
 Tsoa
+```
 
 ### project structure
 

@@ -50,6 +50,7 @@
             true,
             "always"
         ],
+        "no-magic-numbers": false,
         "triple-equals": [
             true,
             "allow-null-check"

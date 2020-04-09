@@ -1,277 +1,302 @@
 {
-	"basePath": "/",
-	"consumes": [
-		"application/json"
-	],
-	"definitions": {
-		"Client": {
-			"properties": {
-				"id": {
-					"type": "number",
-					"format": "double",
-					"x-nullable": true
-				},
-				"firstName": {
-					"type": "string"
-				},
-				"lastName": {
-					"type": "string"
-				},
-				"email": {
-					"type": "string",
-					"x-nullable": true
-				},
-				"phone": {
-					"type": "number",
-					"format": "double"
-				},
-				"age": {
-					"type": "number",
-					"format": "double",
-					"x-nullable": true
-				},
-				"address": {
-					"type": "string"
-				},
-				"city": {
-					"type": "string"
-				},
-				"zip_code": {
-					"type": "number",
-					"format": "double"
-				},
-				"country": {
-					"type": "string"
-				},
-				"createdDate": {
-					"type": "string",
-					"format": "date-time",
-					"x-nullable": true
-				},
-				"updatedDate": {
-					"type": "string",
-					"format": "date-time",
-					"x-nullable": true
-				},
-				"vehicules": {
-					"items": {
-						"$ref": "#/definitions/Vehicule"
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"IResponse": {
+				"properties": {
+					"message": {
+						"type": "string",
+						"nullable": true
 					},
-					"type": "array",
-					"x-nullable": true
-				},
-				"compagnies": {
-					"items": {
-						"$ref": "#/definitions/Company"
+					"status": {
+						"type": "string"
 					},
-					"type": "array",
-					"x-nullable": true
-				}
+					"data": {
+						"additionalProperties": true,
+						"type": "object"
+					}
+				},
+				"required": [
+					"status",
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
 			},
-			"required": [
-				"firstName",
-				"lastName",
-				"phone",
-				"address",
-				"city",
-				"zip_code",
-				"country"
-			],
-			"type": "object",
-			"additionalProperties": false
+			"Client": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"firstName": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string",
+						"nullable": true
+					},
+					"phone": {
+						"type": "number",
+						"format": "double"
+					},
+					"age": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"address": {
+						"type": "string"
+					},
+					"city": {
+						"type": "string"
+					},
+					"zip_code": {
+						"type": "number",
+						"format": "double"
+					},
+					"country": {
+						"type": "string"
+					},
+					"createdDate": {
+						"type": "string",
+						"format": "date-time",
+						"nullable": true
+					},
+					"updatedDate": {
+						"type": "string",
+						"format": "date-time",
+						"nullable": true
+					},
+					"vehicules": {
+						"items": {
+							"$ref": "#/components/schemas/Vehicule"
+						},
+						"type": "array",
+						"nullable": true
+					},
+					"compagnies": {
+						"items": {
+							"$ref": "#/components/schemas/Company"
+						},
+						"type": "array",
+						"nullable": true
+					}
+				},
+				"required": [
+					"firstName",
+					"lastName",
+					"phone",
+					"address",
+					"city",
+					"zip_code",
+					"country"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Vehicule": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"marque": {
+						"type": "string"
+					},
+					"model": {
+						"type": "string"
+					},
+					"color": {
+						"type": "string"
+					},
+					"pictures": {
+						"type": "string"
+					},
+					"createdDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"client": {
+						"$ref": "#/components/schemas/Client"
+					}
+				},
+				"required": [
+					"id",
+					"marque",
+					"model",
+					"color",
+					"pictures",
+					"createdDate",
+					"updatedDate",
+					"client"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Company": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"phone": {
+						"type": "number",
+						"format": "double"
+					},
+					"address": {
+						"type": "string"
+					},
+					"city": {
+						"type": "string"
+					},
+					"zip_code": {
+						"type": "number",
+						"format": "double"
+					},
+					"country": {
+						"type": "string"
+					},
+					"createdDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"users": {
+						"items": {
+							"$ref": "#/components/schemas/User"
+						},
+						"type": "array"
+					},
+					"clients": {
+						"items": {
+							"$ref": "#/components/schemas/Client"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"email",
+					"phone",
+					"address",
+					"city",
+					"zip_code",
+					"country",
+					"createdDate",
+					"updatedDate",
+					"users",
+					"clients"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"User": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"firstName": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"phone": {
+						"type": "number",
+						"format": "double"
+					},
+					"birthdate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"address": {
+						"type": "string"
+					},
+					"city": {
+						"type": "string"
+					},
+					"zip_code": {
+						"type": "number",
+						"format": "double"
+					},
+					"country": {
+						"type": "string"
+					},
+					"picture": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"salt": {
+						"type": "string"
+					},
+					"isActive": {
+						"type": "boolean"
+					},
+					"createdDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"company": {
+						"$ref": "#/components/schemas/Company"
+					}
+				},
+				"required": [
+					"id",
+					"firstName",
+					"lastName",
+					"email",
+					"phone",
+					"birthdate",
+					"address",
+					"city",
+					"zip_code",
+					"country",
+					"picture",
+					"password",
+					"salt",
+					"isActive",
+					"createdDate",
+					"updatedDate",
+					"company"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
 		},
-		"Vehicule": {
-			"properties": {
-				"id": {
-					"type": "number",
-					"format": "double"
-				},
-				"marque": {
-					"type": "string"
-				},
-				"model": {
-					"type": "string"
-				},
-				"color": {
-					"type": "string"
-				},
-				"pictures": {
-					"type": "string"
-				},
-				"createdDate": {
-					"type": "string",
-					"format": "date-time"
-				},
-				"updatedDate": {
-					"type": "string",
-					"format": "date-time"
-				},
-				"client": {
-					"$ref": "#/definitions/Client"
-				}
-			},
-			"required": [
-				"id",
-				"marque",
-				"model",
-				"color",
-				"pictures",
-				"createdDate",
-				"updatedDate",
-				"client"
-			],
-			"type": "object",
-			"additionalProperties": false
-		},
-		"Company": {
-			"properties": {
-				"id": {
-					"type": "number",
-					"format": "double"
-				},
-				"name": {
-					"type": "string"
-				},
-				"email": {
-					"type": "string"
-				},
-				"phone": {
-					"type": "number",
-					"format": "double"
-				},
-				"address": {
-					"type": "string"
-				},
-				"city": {
-					"type": "string"
-				},
-				"zip_code": {
-					"type": "number",
-					"format": "double"
-				},
-				"country": {
-					"type": "string"
-				},
-				"createdDate": {
-					"type": "string",
-					"format": "date-time"
-				},
-				"updatedDate": {
-					"type": "string",
-					"format": "date-time"
-				},
-				"users": {
-					"items": {
-						"$ref": "#/definitions/User"
-					},
-					"type": "array"
-				},
-				"clients": {
-					"items": {
-						"$ref": "#/definitions/Client"
-					},
-					"type": "array"
-				}
-			},
-			"required": [
-				"id",
-				"name",
-				"email",
-				"phone",
-				"address",
-				"city",
-				"zip_code",
-				"country",
-				"createdDate",
-				"updatedDate",
-				"users",
-				"clients"
-			],
-			"type": "object",
-			"additionalProperties": false
-		},
-		"User": {
-			"properties": {
-				"id": {
-					"type": "number",
-					"format": "double"
-				},
-				"firstName": {
-					"type": "string"
-				},
-				"lastName": {
-					"type": "string"
-				},
-				"email": {
-					"type": "string"
-				},
-				"phone": {
-					"type": "number",
-					"format": "double"
-				},
-				"birthdate": {
-					"type": "string",
-					"format": "date-time"
-				},
-				"address": {
-					"type": "string"
-				},
-				"city": {
-					"type": "string"
-				},
-				"zip_code": {
-					"type": "number",
-					"format": "double"
-				},
-				"country": {
-					"type": "string"
-				},
-				"picture": {
-					"type": "string"
-				},
-				"password": {
-					"type": "string"
-				},
-				"salt": {
-					"type": "string"
-				},
-				"isActive": {
-					"type": "boolean"
-				},
-				"createdDate": {
-					"type": "string",
-					"format": "date-time"
-				},
-				"updatedDate": {
-					"type": "string",
-					"format": "date-time"
-				},
-				"company": {
-					"$ref": "#/definitions/Company"
-				}
-			},
-			"required": [
-				"id",
-				"firstName",
-				"lastName",
-				"email",
-				"phone",
-				"birthdate",
-				"address",
-				"city",
-				"zip_code",
-				"country",
-				"picture",
-				"password",
-				"salt",
-				"isActive",
-				"createdDate",
-				"updatedDate",
-				"company"
-			],
-			"type": "object",
-			"additionalProperties": false
-		}
+		"securitySchemes": {}
 	},
 	"info": {
 		"title": "backendicm",
@@ -280,40 +305,40 @@
 			"name": "MIT"
 		}
 	},
+	"openapi": "3.0.0",
 	"paths": {
-		"/client/get-all": {
+		"/v1/clients/get-all": {
 			"get": {
 				"operationId": "GetClients",
-				"produces": [
-					"application/json"
-				],
 				"responses": {
 					"200": {
-						"description": "Ok",
-						"schema": {
-							"items": {
-								"$ref": "#/definitions/Client"
-							},
-							"type": "array"
-						}
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						},
+						"description": "Ok"
 					}
 				},
 				"security": [],
 				"parameters": []
 			}
 		},
-		"/client/get/{id}": {
+		"/v1/clients/get/{id}": {
 			"get": {
 				"operationId": "GetClient",
-				"produces": [
-					"application/json"
-				],
 				"responses": {
 					"200": {
-						"description": "Ok",
-						"schema": {
-							"$ref": "#/definitions/Client"
-						}
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Client"
+								}
+							}
+						},
+						"description": "Ok"
 					}
 				},
 				"security": [],
@@ -322,51 +347,55 @@
 						"in": "path",
 						"name": "id",
 						"required": true,
-						"format": "double",
-						"type": "number"
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
 					}
 				]
 			}
 		},
-		"/client/create": {
+		"/v1/clients/create": {
 			"post": {
 				"operationId": "CreateClient",
-				"produces": [
-					"application/json"
-				],
 				"responses": {
 					"200": {
-						"description": "Ok",
-						"schema": {
-							"$ref": "#/definitions/Client"
-						}
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Client"
+								}
+							}
+						},
+						"description": "Ok"
 					}
 				},
 				"security": [],
-				"parameters": [
-					{
-						"in": "body",
-						"name": "body",
-						"required": true,
-						"schema": {
-							"$ref": "#/definitions/Client"
+				"parameters": [],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Client"
+							}
 						}
 					}
-				]
+				}
 			}
 		},
-		"/client/update/{id}": {
+		"/v1/clients/update/{id}": {
 			"put": {
 				"operationId": "UpdateClient",
-				"produces": [
-					"application/json"
-				],
 				"responses": {
 					"200": {
-						"description": "Ok",
-						"schema": {
-							"$ref": "#/definitions/Client"
-						}
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Client"
+								}
+							}
+						},
+						"description": "Ok"
 					}
 				},
 				"security": [],
@@ -375,28 +404,31 @@
 						"in": "path",
 						"name": "id",
 						"required": true,
-						"format": "double",
-						"type": "number"
-					},
-					{
-						"in": "body",
-						"name": "body",
-						"required": true,
 						"schema": {
-							"$ref": "#/definitions/Client"
+							"format": "double",
+							"type": "number"
 						}
 					}
-				]
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Client"
+							}
+						}
+					}
+				}
 			}
 		},
-		"/client/delete/{id}": {
+		"/v1/clients/delete/{id}": {
 			"delete": {
 				"operationId": "DeleteClient",
-				"produces": [
-					"application/json"
-				],
 				"responses": {
 					"204": {
+						"content": {
+							"application/json": {}
+						},
 						"description": "No content"
 					}
 				},
@@ -406,16 +438,18 @@
 						"in": "path",
 						"name": "id",
 						"required": true,
-						"format": "double",
-						"type": "number"
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
 					}
 				]
 			}
 		}
 	},
-	"produces": [
-		"application/json"
-	],
-	"swagger": "2.0",
-	"securityDefinitions": {}
+	"servers": [
+		{
+			"url": "https://localhost:3000/"
+		}
+	]
 }

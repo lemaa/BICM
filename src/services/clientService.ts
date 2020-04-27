@@ -13,12 +13,14 @@ export class ClientService {
 
 	public async findAll(): Promise<Client[]> {
 
-        return this.clientRepository.find();
+        const clients = await this.clientRepository.find();
+
+        return clients;
 	}
 
     public async findOne(id: number): Promise<Client | undefined> {
 
-        const client =	this.clientRepository.findOne({ id });
+        const client =	await this.clientRepository.findOne({ id });
 
 		      return client;
 
@@ -33,16 +35,19 @@ export class ClientService {
 
     public async update(id: number, client: Client): Promise<Client> {
 
-		client.id = id;
+        client.id = id;
 
-		return this.clientRepository.save(client);
+        const modifiedClient =  await this.clientRepository.save(client);
+
+        return modifiedClient;
+
     }
 
-    public async delete(id: number): Promise<void> {
+    public async delete(id: number): Promise<any> {
 
-		await this.clientRepository.delete(id);
+		const deletedClient = await this.clientRepository.delete(id);
 
-		return;
+		return deletedClient ;
     }
 
 }

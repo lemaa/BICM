@@ -3,12 +3,7 @@ import { ClientService } from '../services/clientService';
 import { injectable, inject } from 'inversify';
 import { Client } from './../models/clientModel';
 import ErrorHandler from '../utils/errorHandler';
-
-export interface IResponse {
-    message?: string;
-    status: string;
-    data: any;
-}
+import { IResponse } from './responses/responseInterface';
 
 @injectable()
 @Route('/v1/clients')
@@ -22,86 +17,147 @@ export class ClientController extends Controller {
     public async getClients(): Promise<IResponse> {
         try {
             const clients = await this.clientService.findAll();
+            if (clients) {
+                return {
+                    status: 200,
+                    data: {
+                        length: clients.length,
+                        clients
+                    }
+                };
+            }
 
-            return {
-                status: 'success',
-                data: {
-                    length: clients.length,
-                    clients
-                }
-            };
+            throw new ErrorHandler(404, 'No clients found.');
 
         } catch (err) {
-            throw new ErrorHandler(500, 'An unexpected error occurred.');
+            return {
+                status: err.statusCode,
+                message: err.message,
+                data: null
+        };
         }
 
     }
 
     @Get('/get/{id}')
-    public async getClient(id: number): Promise<Client> {
+    public async getClient(id: number): Promise<IResponse> {
         /* todo: - input validation
-                 - catch errors proprely
-                 - return response as {code, message, data}
         */
         try {
             const client = await this.clientService.findOne(id);
+
             if (client) {
-                return client;
+                return {
+                    status: 200,
+                    data: {
+                        client
+                    }
+                };
             }
+            throw new ErrorHandler(404, 'No client found.');
+
         } catch (err) {
-            console.error(err);
+              return {
+                    status: err.statusCode,
+                    message: err.message,
+                    data: null
+            };
         }
 
     }
 
     @Post('/create')
-    public async createClient(@Body() body: Client): Promise<Client> {
+    public async createClient(@Body() body: Client): Promise<IResponse> {
         /* todo: - input validation
                  - catch errors proprely
-                 - return response as {code, message, data}
         */
         try {
-            let client = new Client();
-            client = body;
+            let newClient = new Client();
+            newClient = body;
 
-            return this.clientService.create(client);
+            const client = await this.clientService.create(newClient);
+
+            return {
+                status: 200,
+                data: {
+                    client
+                }
+            };
 
         } catch (err) {
-            console.error(err);
+            return {
+                status: err.statusCode,
+                message: err.message,
+                data: null
+            };
         }
 
     }
 
     @Put('/update/{id}')
-    public async updateClient(@Path('id') id: number, @Body() body: Client): Promise<Client> {
+    public async updateClient(@Path('id') id: number, @Body() body: Client): Promise<IResponse> {
         /* todo: - input validation
                  - catch errors proprely
-                 - return response as {code, message, data}
         */
         try {
-            let client = new Client();
-            client = body;
 
-            return this.clientService.update(id, client);
+            const clientExists = await this.clientService.findOne(id);
+
+            if (clientExists) {
+
+                let modifiedClient = new Client();
+                modifiedClient = body;
+                const client = await  this.clientService.update(id, modifiedClient);
+
+                return {
+                    status: 200,
+                    data: {
+                        client
+                    }
+                };
+            }
+
+            throw new ErrorHandler(404, 'No client found for update.');
 
         } catch (err) {
-            console.error(err);
+            return {
+                status: err.statusCode,
+                message: err.message,
+                data: null
+            };
         }
 
     }
 
     @Delete('/delete/{id}')
-    public async deleteClient(@Path('id') id: number): Promise<void> {
+    public async deleteClient(@Path('id') id: number): Promise<IResponse> {
         /* todo: - input validation
                  - catch errors proprely
-                 - return response as {code, message, data}
         */
         try {
 
-            return this.clientService.delete(id);
+            const clientExists = await this.clientService.findOne(id);
+            if (clientExists) {
+
+                const deletedClient = await this.clientService.delete(id);
+
+                if (deletedClient.affected === 1) {
+                    return {
+                        status: 200,
+                        data: {}
+                    };
+                }
+                throw new ErrorHandler(500, 'Unexpected error');
+            }
+
+            throw new ErrorHandler(404, 'no client found to delete' );
 
         } catch (err) {
-            console.error(err);
+            return {
+                status: err.statusCode,
+                message: err.message,
+                data: null
+            };
         }
 
     }

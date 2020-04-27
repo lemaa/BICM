@@ -12,15 +12,11 @@ export class SettingsService {
 		this.settingsRepository = getCustomRepository(SettingsRepository);
 	}
 
-    public async get(user: User): Promise<Settings[]> {
+    public async findOne(id: number): Promise<Settings | undefined> {
 
-        const settings = this.settingsRepository.find({
-            where: {
-                userId: user.id
-            }
-        });
+        const settings =	await this.settingsRepository.findOne({ id });
 
-        return settings;
+		      return settings;
 
 	}
 

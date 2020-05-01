@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Header, Path, Post, Query, Route, Put, SuccessResponse, Response, Delete } from 'tsoa';
+import { Body, Controller, Get, Header, Path, Post, Query, Route, Put, SuccessResponse, Response, Delete, Tags, Security } from 'tsoa';
 import { SettingsService } from '../services/settingsService';
 import { injectable, inject } from 'inversify';
 import ErrorHandler from '../utils/errorHandler';
@@ -7,11 +7,14 @@ import { IResponse } from './responses/responseInterface';
 
 @injectable()
 @Route('/v1/settings')
+@Tags('Settings')
 export class SettingsController extends Controller {
 
     constructor(@inject(SettingsService) private settingsService: SettingsService) {
         super();
     }
+
+    @Security('Bearer')
     @Get('/get/{id}')
     public async getSettings(id: number): Promise<IResponse> {
         /* todo: - input validation
@@ -39,6 +42,7 @@ export class SettingsController extends Controller {
 
     }
 
+    @Security('Bearer')
     @Put('/update/{id}')
     public async updateSettings(@Path('id') id: number, @Body() body: Settings): Promise<IResponse> {
         /* todo: - input validation

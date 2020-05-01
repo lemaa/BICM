@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Header, Path, Post, Query, Route, Put, SuccessResponse, Response, Delete } from 'tsoa';
+import { Body, Controller, Get, Header, Path, Post, Query, Route, Put, SuccessResponse, Response, Delete, Tags, Security } from 'tsoa';
 import { CompanyService } from '../services/companyService';
 import { injectable, inject } from 'inversify';
 import ErrorHandler from '../utils/errorHandler';
@@ -7,12 +7,14 @@ import { IResponse } from './responses/responseInterface';
 
 @injectable()
 @Route('/v1/compagnies')
+@Tags('Company')
 export class CompanyController extends Controller {
 
     constructor(@inject(CompanyService) private companyService: CompanyService) {
         super();
     }
 
+    @Security('Bearer')
     @Get('/get/{id}')
     public async getCompany(id: number): Promise<IResponse> {
         /* todo: - input validation
@@ -40,6 +42,7 @@ export class CompanyController extends Controller {
 
     }
 
+    @Security('Bearer')
     @Post('/create')
     public async createCompany(@Body() body: Company): Promise<IResponse> {
         /* todo: - input validation
@@ -68,6 +71,7 @@ export class CompanyController extends Controller {
 
     }
 
+    @Security('Bearer')
     @Put('/update/{id}')
     public async updateCompany(@Path('id') id: number, @Body() body: Company): Promise<IResponse> {
         /* todo: - input validation
@@ -103,6 +107,7 @@ export class CompanyController extends Controller {
 
     }
 
+    @Security('Bearer')
     @Delete('/delete/{id}')
     public async deleteCompany(@Path('id') id: number): Promise<IResponse> {
         /* todo: - input validation

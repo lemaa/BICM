@@ -5,7 +5,7 @@ import { User } from './userModel';
 export class Settings {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id?: number;
 
     @Column('boolean', { default: true})
     notification: boolean;
@@ -17,10 +17,10 @@ export class Settings {
     sound: boolean;
 
     @CreateDateColumn()
-    createdDate: Date;
+    createdDate?: Date;
 
     @UpdateDateColumn()
-    updatedDate: Date;
+    updatedDate?: Date;
 
     @OneToOne(type => User)
     @JoinColumn()

@@ -3,13 +3,23 @@
         "outputDirectory": ".",
         "entryFile": "./src/app.ts",
         "noImplicitAdditionalProperties": "silently-remove-extras",
-        "specVersion": 3
+        "specVersion": 3,
+        "securityDefinitions": {
+            "Bearer": {
+              "type": "apiKey",
+              "in": "header",
+              "name": "authorization"
+            }
+          }
+      
 
     },
     "routes": {
         "basePath": "/",
         "entryFile": "./src/app.ts",
         "routesDir": "./src/routes",
-        "iocModule": "./src/config/ioc"
+        "iocModule": "./src/config/ioc",
+        "authenticationModule": "./src/utils/authChecker.ts"
+
     }
 }

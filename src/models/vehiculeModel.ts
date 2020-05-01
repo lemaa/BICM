@@ -6,7 +6,7 @@ import { Client } from './clientModel';
 export class Vehicule {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id?: number;
 
     @Column('varchar', {nullable: true})
     marque: string;
@@ -19,13 +19,13 @@ export class Vehicule {
 
     @Column('varchar', {nullable: true})
     @IsJSON()
-    pictures: string;
+    pictures?: string;
 
     @CreateDateColumn()
-    createdDate: Date;
+    createdDate?: Date;
 
     @UpdateDateColumn()
-    updatedDate: Date;
+    updatedDate?: Date;
 
     @ManyToOne(type => Client, client => client.vehicules)
     client: Client;

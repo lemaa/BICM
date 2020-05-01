@@ -8,12 +8,13 @@
 		"schemas": {
 			"IResponse": {
 				"properties": {
+					"status": {
+						"type": "number",
+						"format": "double"
+					},
 					"message": {
 						"type": "string",
 						"nullable": true
-					},
-					"status": {
-						"type": "string"
 					},
 					"data": {
 						"additionalProperties": true,
@@ -107,7 +108,8 @@
 				"properties": {
 					"id": {
 						"type": "number",
-						"format": "double"
+						"format": "double",
+						"nullable": true
 					},
 					"marque": {
 						"type": "string"
@@ -119,28 +121,27 @@
 						"type": "string"
 					},
 					"pictures": {
-						"type": "string"
+						"type": "string",
+						"nullable": true
 					},
 					"createdDate": {
 						"type": "string",
-						"format": "date-time"
+						"format": "date-time",
+						"nullable": true
 					},
 					"updatedDate": {
 						"type": "string",
-						"format": "date-time"
+						"format": "date-time",
+						"nullable": true
 					},
 					"client": {
 						"$ref": "#/components/schemas/Client"
 					}
 				},
 				"required": [
-					"id",
 					"marque",
 					"model",
 					"color",
-					"pictures",
-					"createdDate",
-					"updatedDate",
 					"client"
 				],
 				"type": "object",
@@ -150,13 +151,15 @@
 				"properties": {
 					"id": {
 						"type": "number",
-						"format": "double"
+						"format": "double",
+						"nullable": true
 					},
 					"name": {
 						"type": "string"
 					},
 					"email": {
-						"type": "string"
+						"type": "string",
+						"nullable": true
 					},
 					"phone": {
 						"type": "number",
@@ -177,38 +180,36 @@
 					},
 					"createdDate": {
 						"type": "string",
-						"format": "date-time"
+						"format": "date-time",
+						"nullable": true
 					},
 					"updatedDate": {
 						"type": "string",
-						"format": "date-time"
+						"format": "date-time",
+						"nullable": true
 					},
 					"users": {
 						"items": {
 							"$ref": "#/components/schemas/User"
 						},
-						"type": "array"
+						"type": "array",
+						"nullable": true
 					},
 					"clients": {
 						"items": {
 							"$ref": "#/components/schemas/Client"
 						},
-						"type": "array"
+						"type": "array",
+						"nullable": true
 					}
 				},
 				"required": [
-					"id",
 					"name",
-					"email",
 					"phone",
 					"address",
 					"city",
 					"zip_code",
-					"country",
-					"createdDate",
-					"updatedDate",
-					"users",
-					"clients"
+					"country"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -217,7 +218,8 @@
 				"properties": {
 					"id": {
 						"type": "number",
-						"format": "double"
+						"format": "double",
+						"nullable": true
 					},
 					"firstName": {
 						"type": "string"
@@ -234,7 +236,8 @@
 					},
 					"birthdate": {
 						"type": "string",
-						"format": "date-time"
+						"format": "date-time",
+						"nullable": true
 					},
 					"address": {
 						"type": "string"
@@ -250,12 +253,13 @@
 						"type": "string"
 					},
 					"picture": {
+						"type": "string",
+						"nullable": true
+					},
+					"role": {
 						"type": "string"
 					},
 					"password": {
-						"type": "string"
-					},
-					"salt": {
 						"type": "string"
 					},
 					"isActive": {
@@ -263,40 +267,82 @@
 					},
 					"createdDate": {
 						"type": "string",
-						"format": "date-time"
+						"format": "date-time",
+						"nullable": true
 					},
 					"updatedDate": {
 						"type": "string",
-						"format": "date-time"
+						"format": "date-time",
+						"nullable": true
 					},
 					"company": {
-						"$ref": "#/components/schemas/Company"
+						"$ref": "#/components/schemas/Company",
+						"nullable": true
 					}
 				},
 				"required": [
-					"id",
 					"firstName",
 					"lastName",
 					"email",
 					"phone",
-					"birthdate",
 					"address",
 					"city",
 					"zip_code",
 					"country",
-					"picture",
+					"role",
 					"password",
-					"salt",
-					"isActive",
-					"createdDate",
-					"updatedDate",
-					"company"
+					"isActive"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Settings": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"notification": {
+						"type": "boolean"
+					},
+					"theme": {
+						"type": "boolean"
+					},
+					"sound": {
+						"type": "boolean"
+					},
+					"createdDate": {
+						"type": "string",
+						"format": "date-time",
+						"nullable": true
+					},
+					"updatedDate": {
+						"type": "string",
+						"format": "date-time",
+						"nullable": true
+					},
+					"user": {
+						"$ref": "#/components/schemas/User"
+					}
+				},
+				"required": [
+					"notification",
+					"theme",
+					"sound",
+					"user"
 				],
 				"type": "object",
 				"additionalProperties": false
 			}
 		},
-		"securitySchemes": {}
+		"securitySchemes": {
+			"Bearer": {
+				"type": "apiKey",
+				"in": "header",
+				"name": "authorization"
+			}
+		}
 	},
 	"info": {
 		"title": "backendicm",
@@ -322,7 +368,14 @@
 						"description": "Ok"
 					}
 				},
-				"security": [],
+				"tags": [
+					"Client"
+				],
+				"security": [
+					{
+						"Bearer": []
+					}
+				],
 				"parameters": []
 			}
 		},
@@ -334,13 +387,16 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Client"
+									"$ref": "#/components/schemas/IResponse"
 								}
 							}
 						},
 						"description": "Ok"
 					}
 				},
+				"tags": [
+					"Client"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -363,13 +419,16 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Client"
+									"$ref": "#/components/schemas/IResponse"
 								}
 							}
 						},
 						"description": "Ok"
 					}
 				},
+				"tags": [
+					"Client"
+				],
 				"security": [],
 				"parameters": [],
 				"requestBody": {
@@ -391,13 +450,16 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Client"
+									"$ref": "#/components/schemas/IResponse"
 								}
 							}
 						},
 						"description": "Ok"
 					}
 				},
+				"tags": [
+					"Client"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -425,13 +487,20 @@
 			"delete": {
 				"operationId": "DeleteClient",
 				"responses": {
-					"204": {
+					"200": {
 						"content": {
-							"application/json": {}
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
 						},
-						"description": "No content"
+						"description": "Ok"
 					}
 				},
+				"tags": [
+					"Client"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -444,6 +513,518 @@
 						}
 					}
 				]
+			}
+		},
+		"/v1/compagnies/get/{id}": {
+			"get": {
+				"operationId": "GetCompany",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Company"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/v1/compagnies/create": {
+			"post": {
+				"operationId": "CreateCompany",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Company"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Company"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/compagnies/update/{id}": {
+			"put": {
+				"operationId": "UpdateCompany",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Company"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Company"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/compagnies/delete/{id}": {
+			"delete": {
+				"operationId": "DeleteCompany",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Company"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/v1/settings/get/{id}": {
+			"get": {
+				"operationId": "GetSettings",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Settings"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/v1/settings/update/{id}": {
+			"put": {
+				"operationId": "UpdateSettings",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Settings"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Settings"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/users/get/{id}": {
+			"get": {
+				"operationId": "GetUser",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/v1/users/update/{id}": {
+			"put": {
+				"operationId": "UpdateUser",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/User"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/users/delete/{id}": {
+			"delete": {
+				"operationId": "DeleteUser",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"User"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/v1/vehicules/get/{id}": {
+			"get": {
+				"operationId": "GetVehicule",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Vehicule"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/v1/vehicules/create": {
+			"post": {
+				"operationId": "CreateVehicule",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Vehicule"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Vehicule"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/vehicules/update/{id}": {
+			"put": {
+				"operationId": "UpdateVehicule",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Vehicule"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Vehicule"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/vehicules/delete/{id}": {
+			"delete": {
+				"operationId": "DeleteVehicule",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Vehicule"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/v1/auth/signup": {
+			"post": {
+				"operationId": "Signup",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/User"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/auth/signin": {
+			"post": {
+				"operationId": "Signin",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object"
+							}
+						}
+					}
+				}
 			}
 		}
 	},

@@ -7,14 +7,14 @@ import { Client } from './clientModel';
 export class Company {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id?: number;
 
     @Column('varchar', { unique: true, nullable: false })
     name: string;
 
     @Column('varchar', { unique: true, nullable: false })
     @IsEmail()
-    email: string;
+    email?: string;
 
     @Column('integer', { unique: true, nullable: false })
     phone: number;
@@ -32,14 +32,14 @@ export class Company {
     country: string;
 
     @CreateDateColumn()
-    createdDate: Date;
+    createdDate?: Date;
 
     @UpdateDateColumn()
-    updatedDate: Date;
+    updatedDate?: Date;
 
     @OneToMany(type => User, user => user.company)
-    users: User[];
+    users?: User[];
 
     @ManyToMany(type => Client, client => client.compagnies)
-    clients: Client[];
+    clients?: Client[];
 }

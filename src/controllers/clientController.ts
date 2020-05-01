@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Header, Path, Post, Query, Route, Put, SuccessResponse, Response, Delete } from 'tsoa';
+import { Body, Controller, Get, Header, Path, Post, Query, Route, Put, SuccessResponse, Response, Delete, Tags, Security } from 'tsoa';
 import { ClientService } from '../services/clientService';
 import { injectable, inject } from 'inversify';
 import { Client } from './../models/clientModel';
@@ -7,12 +7,14 @@ import { IResponse } from './responses/responseInterface';
 
 @injectable()
 @Route('/v1/clients')
+@Tags('Client')
 export class ClientController extends Controller {
 
     constructor(@inject(ClientService) private clientService: ClientService) {
         super();
     }
 
+    @Security('Bearer')
     @Get('/get-all')
     public async getClients(): Promise<IResponse> {
         try {
@@ -39,6 +41,7 @@ export class ClientController extends Controller {
 
     }
 
+    @Security('Bearer')
     @Get('/get/{id}')
     public async getClient(id: number): Promise<IResponse> {
         /* todo: - input validation
@@ -66,6 +69,7 @@ export class ClientController extends Controller {
 
     }
 
+    @Security('Bearer')
     @Post('/create')
     public async createClient(@Body() body: Client): Promise<IResponse> {
         /* todo: - input validation
@@ -94,6 +98,7 @@ export class ClientController extends Controller {
 
     }
 
+    @Security('Bearer')
     @Put('/update/{id}')
     public async updateClient(@Path('id') id: number, @Body() body: Client): Promise<IResponse> {
         /* todo: - input validation
@@ -129,6 +134,7 @@ export class ClientController extends Controller {
 
     }
 
+    @Security('Bearer')
     @Delete('/delete/{id}')
     public async deleteClient(@Path('id') id: number): Promise<IResponse> {
         /* todo: - input validation

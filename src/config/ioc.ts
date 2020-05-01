@@ -3,7 +3,7 @@ import {Repository } from 'typeorm';
 import { Controller } from 'tsoa';
 import { ClientRepository, CompanyRepository, SettingsRepository, UserRepository, VehiculeRepository } from './../repositories';
 import { ClientService, CompanyService , SettingsService, UserService, VehiculeService } from './../services';
-import { ClientController, CompanyController, SettingsController, UserController, VehiculeController } from '../controllers';
+import { ClientController, CompanyController, SettingsController, UserController, VehiculeController, AuthController } from '../controllers';
 
 decorate(injectable(), Controller);
 decorate(injectable(), Repository);
@@ -30,4 +30,5 @@ iocContainer.bind<VehiculeRepository>(VehiculeRepository).to(VehiculeRepository)
 iocContainer.bind<VehiculeService>(VehiculeService).to(VehiculeService);
 iocContainer.bind<VehiculeController>(VehiculeController).to(VehiculeController);
 
+iocContainer.bind<AuthController>(AuthController).to(AuthController);
 export { iocContainer };

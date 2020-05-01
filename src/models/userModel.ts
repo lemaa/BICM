@@ -6,7 +6,7 @@ import { Company } from './companyModel';
 export class User {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id?: number;
 
     @Column('varchar', {nullable: false })
     firstName: string;
@@ -23,7 +23,7 @@ export class User {
 
     @Column('date')
     @IsDate()
-    birthdate: Date;
+    birthdate?: Date;
 
     @Column('varchar')
     address: string;
@@ -38,24 +38,23 @@ export class User {
     country: string;
 
     @Column('varchar')
-    picture: string;
+    picture?: string;
+
+    @Column('varchar')
+    role: string;
 
     @Column('varchar', { nullable: false })
     password: string;
-
-    @Column('varchar', { nullable: false })
-    salt: string;
 
     @Column('boolean', {default: false})
     isActive: boolean;
 
     @CreateDateColumn()
-    createdDate: Date;
+    createdDate?: Date;
 
     @UpdateDateColumn()
-    updatedDate: Date;
+    updatedDate?: Date;
 
     @ManyToOne(type => Company, company => company.users)
-    company: Company;
-
+    company?: Company;
 }

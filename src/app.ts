@@ -2,6 +2,7 @@
  import cors from 'cors';
  import path from 'path';
  import bodyParser from 'body-parser';
+ import helmet from 'helmet';
  import swaggerUi from 'swagger-ui-express';
  import {RegisterRoutes} from './routes/routes';
  import './controllers/clientController';
@@ -18,6 +19,7 @@
 
     private config(): void {
         this.app.use(cors());
+        this.app.use(helmet());
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));
         this.app.use(express.static(path.join(__dirname, '../public')));
